@@ -13,12 +13,14 @@ router.get('/test-me', function (req, res) {
    helper.printMonth()
    helper.getBatchInfo()
    formatter.trim()
-
+   formatter.string1()
+   formatter.string2()
+   
     res.send('My first ever api!')
 });
 
 
-
+module.exports = router;
 
 
 
@@ -52,5 +54,5 @@ router.get('/test-me', function (req, res) {
 //     res.send('My last api!')
 // });
 
-module.exports = router;
+//module.exports = router;
 // adding this comment for no reason
