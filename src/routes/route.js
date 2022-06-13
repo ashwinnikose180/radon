@@ -1,23 +1,51 @@
 const express = require('express');
 const router = express.Router();
-// const UserModel= require("../models/userModel.js")
-const UserController= require("../controllers/userController")
-const BookController= require("../controllers/bookController")
-const commonMW = require ("../middlewares/commonMiddlewares")
+const productController = require("../controllers/productController")
+const commonMiddleWares = require("../middlewares/commonMiddleWares")
+const userController = require("../controllers/userController")
+const orderController = require('../controllers/orderController')
+
 
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
 
+router.post("/createProduct", productController.createProduct)
+router.post("/createUser", commonMiddleWares.isFreeAppUser , userController.creatUser)
+router.post("/createOrder", orderController.createOrder)
+
+module.exports = router;
 
 
 
-router.post("/createBook", BookController.createBook  )
 
 
 
 
-router.post("/createUser", UserController.createUser)
+
+
+
+
+// const express = require('express');
+// const router = express.Router();
+// // const UserModel= require("../models/userModel.js")
+// const UserController= require("../controllers/userController")
+// const BookController= require("../controllers/bookController")
+// const commonMW = require ("../middlewares/commonMiddlewares")
+
+// router.get("/test-me", function (req, res) {
+//     res.send("My first ever api!")
+// })
+
+
+
+
+// router.post("/createBook", BookController.createBook  )
+
+
+
+
+// router.post("/createUser", UserController.createUser)
 // router.get("/getUsersData", UserController.getUsersData)
 
 
@@ -48,7 +76,7 @@ router.post("/createUser", UserController.createUser)
 
 
 
-router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4, UserController.basicCode)
+//router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4, UserController.basicCode)
 
 
 
@@ -59,4 +87,4 @@ router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.
 
 
 
-module.exports = router;
+// module.exports = router;
