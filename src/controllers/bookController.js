@@ -2,7 +2,23 @@ const book = require("../models/bookModel");
 const mongoose = require("mongoose");
 const user = require("../models/userModel");
 const review = require("../models/reviewModel");
+const aws =require("../controllers/aws")
 
+const createLink = async function(req,res)
+{
+  try{
+  let files = req.files
+  if(files && files.length>0)
+  {
+   let uploadFileURL = await aws.uploadFile(files[0])
+   res.status(201).send({status:true, URL:uploadFileURL})
+  }else{
+    res.status(400).send({ msg: "No file found" })
+  }
+}catch(error){
+  res.status(500).send({msg: error.message})
+}
+}
 const createBook = async (req, res) => {
     try {
         let bookData = req.body;
@@ -288,4 +304,4 @@ const deleteBookById = async (req, res) => {
 
 
 
-module.exports = { createBook, getBook, getBookById, updateBook, deleteBookById };
+module.exports = { createBook, getBook, getBookById, updateBook, deleteBookById,createLink };
